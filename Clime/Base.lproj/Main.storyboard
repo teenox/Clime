@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-GZ-pSF">
-                                <rect key="frame" x="30" y="139" width="333.5" height="384.5"/>
+                                <rect key="frame" x="30" y="139" width="333.5" height="340.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="M0v-Iz-0ao">
                                         <rect key="frame" x="4.5" y="0.0" width="329" height="40"/>
@@ -82,7 +82,11 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="London" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-Ip-JjU">
-                                        <rect key="frame" x="235.5" y="300.5" width="98" height="84"/>
+                                        <rect key="frame" x="235.5" y="300.5" width="98" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="98" id="Gna-y1-gzj"/>
+                                            <constraint firstAttribute="height" constant="40" id="rWi-l0-mhY"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -96,7 +100,6 @@
                             <constraint firstItem="eLW-uC-CAj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="A3Q-HB-t2Z"/>
                             <constraint firstItem="oMs-GZ-pSF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="95" id="D46-ao-9xG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oMs-GZ-pSF" secondAttribute="trailing" constant="50.329999999999998" id="TbF-gC-B28"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oMs-GZ-pSF" secondAttribute="bottom" constant="338.32999999999998" id="ZQM-oW-GxJ"/>
                             <constraint firstItem="eLW-uC-CAj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bbO-KW-TjL"/>
                             <constraint firstItem="eLW-uC-CAj" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="ivt-Jv-erF"/>
                             <constraint firstItem="eLW-uC-CAj" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="nLp-0N-dYZ"/>
