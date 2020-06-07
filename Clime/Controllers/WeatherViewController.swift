@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
     var weatherManager = WeatherManager()
+    var locationManager = CLLocationManager()
     
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -19,25 +21,23 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.requestLocation()
+        searchTextField.delegate = self
         weatherManager.delegate = self
-        
-
     }
 
+}
 
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        if let city = searchTextField.text{
-            //print(city)
-            weatherManager.fetchWeather(cityName: city)
-        }
-        
-        
-        searchTextField.endEditing(true)
-    }
+//MARK: - LocationButton
+extension WeatherViewController{
+    
     @IBAction func LocationButtonPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
     }
 }
+
 
 //MARK: - WeatherManagerDelegate
 
@@ -53,6 +53,54 @@ extension WeatherViewController: WeatherManagerDelegate{
     func didFailWithError(error: Error) {
         print(error)
     }
+}
+
+//MARK: - UITextFieldDelegate
+
+extension WeatherViewController: UITextFieldDelegate{
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        searchTextField.endEditing(true)
+        print(searchTextField.text!)
+    }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        return true
+    }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != ""{
+            return true
+        }else{
+            textField.placeholder = "Type something"
+            return false
+        }
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let city = searchTextField.text {
+            print(city)
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
+        searchTextField.text = ""
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+
+extension WeatherViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last! as CLLocation
+        locationManager.stopUpdatingLocation()
+        let lat = location.coordinate.latitude
+        let lon = location.coordinate.longitude
+        
+        weatherManager.fetchWeather(latitude: lat, longitude: lon)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
